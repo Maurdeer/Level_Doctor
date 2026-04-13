@@ -47,7 +47,7 @@ public class CameraControlScript : MonoBehaviour
             currentProgress = (GOAL_TRANSITION_TIME - goalTransitionTimer) / GOAL_TRANSITION_TIME;
 
             // Interpolate between camera position and zoom.
-            levelCamera.transform.position = Vector3.Lerp(originalLevelCameraPosition, playerCamera.transform.position + Z_OFFSET, currentProgress);
+            levelCamera.transform.position = Vector3.Slerp(originalLevelCameraPosition, playerCamera.transform.position + Z_OFFSET, currentProgress);
             cameraScript.orthographicSize = Mathf.Lerp(ZOOMED_IN_ORTHOGRAPHIC_SIZE, MAX_ORTHOGRAPHIC_SIZE, currentProgress);
         }
         CleanupAfterIntro();
@@ -89,7 +89,7 @@ public class CameraControlScript : MonoBehaviour
             yield return new WaitForSeconds(timeWaited);
         
             float currentProgress = (CAMERA_RESET_TRANSITION_TIME - timer) / CAMERA_RESET_TRANSITION_TIME;
-            levelCamera.transform.position = Vector3.Lerp(originalLevelCameraPosition, targetPosition, currentProgress);
+            levelCamera.transform.position = Vector3.Slerp(originalLevelCameraPosition, targetPosition, currentProgress);
         }
         IS_RESETTING_CAMERA = false;
     }
