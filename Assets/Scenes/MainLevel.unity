@@ -1173,6 +1173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 0
+  playerCollider: {fileID: 746680419}
 --- !u!1 &784683141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1506,6 +1507,10 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 492521646}
+    - target: {fileID: 5010807265141579117, guid: e65c6333863e751459e6475d22a502fd, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 1ed28a7c1e86d8449bca43d27b47f777, type: 2}
     - target: {fileID: 6327386933904203386, guid: e65c6333863e751459e6475d22a502fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.21
@@ -5115,6 +5120,10 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 492521646}
+    - target: {fileID: 5010807265141579117, guid: e65c6333863e751459e6475d22a502fd, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 1ed28a7c1e86d8449bca43d27b47f777, type: 2}
     - target: {fileID: 6327386933904203386, guid: e65c6333863e751459e6475d22a502fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.6

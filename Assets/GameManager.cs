@@ -30,13 +30,14 @@ public class GameManager : MonoBehaviour
 
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    
+    void Start()
     {
         PlayerTurn = 0;
         gamePhase = 0;
         gameManager = this;
         levelCameraObject.transform.position = playerCameraObject.transform.position;
+        PlayerManager.SetPlayerColliderActive(false);
     }
 
     public void GamePhaseChange()
@@ -47,10 +48,12 @@ public class GameManager : MonoBehaviour
         {
             gamePhase = 1;
             SetButtonsActive(false);
+            PlayerManager.SetPlayerColliderActive(true);
             GamePhaseTracker.text = "Move yourself around!";
         }
         else
         {
+            PlayerManager.SetPlayerColliderActive(false);
             gamePhase = 0;
             SetButtonsActive(true);
             GamePhaseTracker.text = "Move items around!";
