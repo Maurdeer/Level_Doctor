@@ -31,7 +31,6 @@ public class Draggable : MonoBehaviour
         {
             transform.position = getMouseWorldPosition() + mousePositionOffset;
         }
-        
     }
 
 
