@@ -654,7 +654,6 @@ MonoBehaviour:
   PlayerManager: {fileID: 746680421}
   button: {fileID: 345594761}
   ObjectiveText: {fileID: 419029661}
-  buttonGameObject: {fileID: 345594759}
   goalObject: {fileID: 987791939}
   levelCameraObject: {fileID: 2118916590}
   playerCameraObject: {fileID: 519420028}
@@ -685,7 +684,6 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: MainCamera
@@ -811,23 +809,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 746680417}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a07f66eada6d4674fb1a62fcc69cbad1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraSpeed: 3
-  MAX_ORTHOGRAPHIC_SIZE: 5
-  ZOOMED_IN_ORTHOGRAPHIC_SIZE: 2
-  GOAL_PAUSE_TIME: 2
-  GOAL_TRANSITION_TIME: 1
 --- !u!1 &565608140
 GameObject:
   m_ObjectHideFlags: 0
@@ -4660,7 +4641,7 @@ TilemapCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1ed28a7c1e86d8449bca43d27b47f777, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4999,6 +4980,7 @@ MonoBehaviour:
   ZOOMED_IN_ORTHOGRAPHIC_SIZE: 2
   GOAL_PAUSE_TIME: 2
   GOAL_TRANSITION_TIME: 1
+  CAMERA_RESET_TRANSITION_TIME: 1
 --- !u!114 &2118916592
 MonoBehaviour:
   m_ObjectHideFlags: 0
