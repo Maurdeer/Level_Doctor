@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     public GameObject ObjectiveText;
 
     // I love boilerplate
-    [SerializeField] private GameObject buttonGameObject;
     [SerializeField] public GameObject goalObject; 
     [SerializeField] public GameObject levelCameraObject;
     [SerializeField] public GameObject playerCameraObject;
@@ -37,41 +36,50 @@ public class GameManager : MonoBehaviour
         PlayerTurn = 0;
         gamePhase = 0;
         gameManager = this;
-        // buttonGameObject = button.GameObject;
         levelCameraObject.transform.position = playerCameraObject.transform.position;
     }
 
     public void GamePhaseChange()
     {
         PlayerManager.toggleMove(); // movement locked
+        ToggleCamera();
         if (gamePhase == 0)
         {
             gamePhase = 1;
-            button.enabled = false;
-            buttonGameObject.SetActive(false);
+            SetButtonsActive(false);
             GamePhaseTracker.text = "Move yourself around!";
-            playerCameraObject.SetActive(true);
-            levelCameraObject.SetActive(false);
         }
         else
         {
             gamePhase = 0;
-            button.enabled = true;
-            buttonGameObject.SetActive(true);
+            SetButtonsActive(true);
             GamePhaseTracker.text = "Move items around!";
-            playerCameraObject.SetActive(false);
-            levelCameraObject.transform.position = playerCameraObject.transform.position;
-            levelCameraObject.SetActive(true);
-            
         }
+        
 
     }
 
-    public void SetUIElementsActive(bool value)
+    public void SetButtonsActive(bool value)
+    {
+        button.gameObject.SetActive(value);
+        button.enabled = value;
+    }
+    // Currently toggles between level and player camera.
+    private void ToggleCamera()
+    {
+        playerCameraObject.SetActive(!playerCameraObject.active);
+        levelCameraObject.SetActive(!levelCameraObject.active);
+        if (levelCameraObject.active) levelCameraObject.transform.position = playerCameraObject.transform.position;
+        
+    }
+
+    public void SetIntroUIElementsActive(bool value)
     {
         PlayerTracker.gameObject.SetActive(value);
         button.gameObject.SetActive(value);
+        button.enabled = value;
         GamePhaseTracker.gameObject.SetActive(value);
+        ObjectiveText.SetActive(!value);
     }
 
     public void PlayerTurnChange()
