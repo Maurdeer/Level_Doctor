@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2471739862413839157, guid: 976e376f71f7a2c47b954f415906eb2b, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 492521646}
     - target: {fileID: 5058797680193741035, guid: 976e376f71f7a2c47b954f415906eb2b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.738568
@@ -1399,6 +1403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winScreen: {fileID: 784683141}
+  scenename: Level2 Description
 --- !u!61 &843470538
 BoxCollider2D:
   m_ObjectHideFlags: 0
