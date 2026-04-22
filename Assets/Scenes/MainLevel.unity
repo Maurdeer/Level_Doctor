@@ -6909,12 +6909,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07f66eada6d4674fb1a62fcc69cbad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSpeed: 2
+  cameraSpeed: 1
   MAX_ORTHOGRAPHIC_SIZE: 5
   ZOOMED_IN_ORTHOGRAPHIC_SIZE: 2
   GOAL_PAUSE_TIME: 2
   GOAL_TRANSITION_TIME: 1
   CAMERA_RESET_TRANSITION_TIME: 1
+  IS_RESETTING_CAMERA: 0
 --- !u!114 &2118916592
 MonoBehaviour:
   m_ObjectHideFlags: 0
