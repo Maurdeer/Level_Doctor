@@ -14,7 +14,7 @@ public class CameraControlScript : MonoBehaviour
     private Vector3 mousePositionOffset;
     
     private bool IS_TRANSITION_PLAYING = false;
-    private bool IS_RESETTING_CAMERA = false;
+    public bool IS_RESETTING_CAMERA = false;
     private bool HAS_PLAYED_BEFORE = false;
     private Vector3 Z_OFFSET = new Vector3(0, 0, -10);
 
@@ -60,6 +60,8 @@ public class CameraControlScript : MonoBehaviour
         levelCamera.transform.position = GameManager.Instance.goalObject.transform.position + Z_OFFSET;
         GameManager.Instance.SetIntroUIElementsActive(false);
         GameManager.Instance.SetButtonsActive(false);
+        GameManager.Instance.ObjectiveText.SetActive(true);
+        
     }
 
     private void CleanupAfterIntro()
@@ -68,6 +70,7 @@ public class CameraControlScript : MonoBehaviour
         GameManager.Instance.SetIntroUIElementsActive(true);
         HAS_PLAYED_BEFORE = true;
         GameManager.Instance.GamePhaseChange();
+        GameManager.Instance.ObjectiveText.SetActive(false);
     }
 
 

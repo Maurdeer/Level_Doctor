@@ -911,7 +911,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &419029662
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1042,6 +1042,7 @@ MonoBehaviour:
   movementDirectionsPlayerText: {fileID: 1954878004}
   levelDirectionsPlayerText: {fileID: 1743360019}
   cameraScript: {fileID: 2118916591}
+  IS_TRANSITION_PLAYING: 0
 --- !u!4 &492521647
 Transform:
   m_ObjectHideFlags: 0

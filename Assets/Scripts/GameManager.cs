@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     public void GamePhaseChange()
     {
         ToggleCamera();
+        
         SetIntroUIElementsActive(false);
         if (gamePhase == 0)
         {
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            PlayerManager.toggleMove(); // movement locked
             activeDescriptionTextObject = levelEditorDirectionsObject;
         }
         IS_TRANSITION_PLAYING = true;
@@ -83,6 +85,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerTracker.gameObject.SetActive(value);
         GamePhaseTracker.gameObject.SetActive(value);
+
     }
 
 
@@ -109,10 +112,11 @@ public class GameManager : MonoBehaviour
         SetDescriptiveObjectActive(false);
         SetIntroUIElementsActive(true);
         IS_TRANSITION_PLAYING = false;
-        PlayerManager.toggleMove(); // movement locked
+        
 
         if (gamePhase == 0)
         {
+            PlayerManager.toggleMove(); // unlock movement
             gamePhase = 1;
             PlayerManager.SetPlayerColliderActive(true);
             GamePhaseTracker.text = "Reach the goal!";
@@ -120,6 +124,7 @@ public class GameManager : MonoBehaviour
         } else if (gamePhase == 1)
         {
             gamePhase = 0;
+            cameraScript.IS_RESETTING_CAMERA = false;
             PlayerManager.SetPlayerColliderActive(false);
             GamePhaseTracker.text = "Move items around!";
             SetButtonsActive(true);

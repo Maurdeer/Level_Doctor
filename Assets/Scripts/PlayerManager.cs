@@ -18,7 +18,7 @@ public class PlayerManager : MonoBehaviour
     public void resetPosition()
     {
         playerTransform.position = defaultPosition;
-
+        ZeroXVelocity();
     }
 
     public void toggleMove()
