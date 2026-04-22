@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public TMP_Text movementDirectionsPlayerText;
     [SerializeField] public TMP_Text levelDirectionsPlayerText;
     [SerializeField] private CameraControlScript cameraScript;
+    public bool IS_TRANSITION_PLAYING;
 
     private GameObject activeDescriptionTextObject;
     // private TMP_Text CurrentTaskDescriptiveText;
@@ -54,15 +55,13 @@ public class GameManager : MonoBehaviour
         if (gamePhase == 0)
         {
             activeDescriptionTextObject = movementDirectionsObject;
-            gamePhase = 1;
             SetButtonsActive(false);
         }
         else
         {
             activeDescriptionTextObject = levelEditorDirectionsObject;
-            gamePhase = 0;
-            
         }
+        IS_TRANSITION_PLAYING = true;
         SetDescriptiveObjectActive(true);
     }
 
@@ -109,19 +108,23 @@ public class GameManager : MonoBehaviour
     {
         SetDescriptiveObjectActive(false);
         SetIntroUIElementsActive(true);
-        cameraScript.ToggleCameraMove();
+        IS_TRANSITION_PLAYING = false;
         PlayerManager.toggleMove(); // movement locked
 
         if (gamePhase == 0)
         {
-            PlayerManager.SetPlayerColliderActive(false);
-            GamePhaseTracker.text = "Move items around!";
-            SetButtonsActive(true);
-        } else if (gamePhase == 1)
-        {
+            gamePhase = 1;
             PlayerManager.SetPlayerColliderActive(true);
             GamePhaseTracker.text = "Reach the goal!";
             PlayerTurnChange();
+        } else if (gamePhase == 1)
+        {
+            gamePhase = 0;
+            PlayerManager.SetPlayerColliderActive(false);
+            GamePhaseTracker.text = "Move items around!";
+            SetButtonsActive(true);
+            
+            
         }
     }
 }
