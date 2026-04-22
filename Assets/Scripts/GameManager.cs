@@ -27,13 +27,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject goalObject; 
     [SerializeField] public GameObject levelCameraObject;
     [SerializeField] public GameObject playerCameraObject;
+    [SerializeField] public GameObject movementDirectionsObject;
+    [SerializeField] public GameObject levelEditorDirectionsObject;
+    [SerializeField] public TMP_Text movementDirectionsPlayerText;
+    [SerializeField] public TMP_Text levelDirectionsPlayerText;
+    [SerializeField] private CameraControlScript cameraScript;
 
+    private GameObject activeDescriptionTextObject;
+    // private TMP_Text CurrentTaskDescriptiveText;
 
 
     
     void Start()
     {
-        PlayerTurn = 0;
+        PlayerTurn = 1;
         gamePhase = 0;
         gameManager = this;
         levelCameraObject.transform.position = playerCameraObject.transform.position;
@@ -42,24 +49,21 @@ public class GameManager : MonoBehaviour
 
     public void GamePhaseChange()
     {
-        PlayerManager.toggleMove(); // movement locked
         ToggleCamera();
+        SetIntroUIElementsActive(false);
         if (gamePhase == 0)
         {
+            activeDescriptionTextObject = movementDirectionsObject;
             gamePhase = 1;
             SetButtonsActive(false);
-            PlayerManager.SetPlayerColliderActive(true);
-            GamePhaseTracker.text = "Move yourself around!";
         }
         else
         {
-            PlayerManager.SetPlayerColliderActive(false);
+            activeDescriptionTextObject = levelEditorDirectionsObject;
             gamePhase = 0;
-            SetButtonsActive(true);
-            GamePhaseTracker.text = "Move items around!";
+            
         }
-        
-
+        SetDescriptiveObjectActive(true);
     }
 
     public void SetButtonsActive(bool value)
@@ -79,20 +83,45 @@ public class GameManager : MonoBehaviour
     public void SetIntroUIElementsActive(bool value)
     {
         PlayerTracker.gameObject.SetActive(value);
-        button.gameObject.SetActive(value);
-        button.enabled = value;
         GamePhaseTracker.gameObject.SetActive(value);
-        ObjectiveText.SetActive(!value);
     }
 
-    public void PlayerTurnChange()
+
+    public void ResetOnPlayerDeath()
+    {
+        PlayerManager.resetPosition();
+        GamePhaseChange();
+    }
+    private void PlayerTurnChange()
     {
         PlayerTurn = (PlayerTurn + 1) % 2; // change player turn
-        PlayerTracker.text = "Player" + (PlayerTurn + 1) + "'s Turn"; // update canvas
-
-        PlayerManager.resetPosition(); // back to start
-        GamePhaseChange();
-        
+        PlayerTracker.text = "Player " + (PlayerTurn + 1) + "'s Turn"; // update canvas
+        levelDirectionsPlayerText.text = "Player " + (PlayerTurn + 1)   + "'s Go!";
+        movementDirectionsPlayerText.text = "Player " + (2 - PlayerTurn) + "'s Go!";
     }
 
+    public void SetDescriptiveObjectActive(bool value)
+    {
+        activeDescriptionTextObject.SetActive(value);
+    }
+
+    public void ConfirmDirectionsRead()
+    {
+        SetDescriptiveObjectActive(false);
+        SetIntroUIElementsActive(true);
+        cameraScript.ToggleCameraMove();
+        PlayerManager.toggleMove(); // movement locked
+
+        if (gamePhase == 0)
+        {
+            PlayerManager.SetPlayerColliderActive(false);
+            GamePhaseTracker.text = "Move items around!";
+            SetButtonsActive(true);
+        } else if (gamePhase == 1)
+        {
+            PlayerManager.SetPlayerColliderActive(true);
+            GamePhaseTracker.text = "Reach the goal!";
+            PlayerTurnChange();
+        }
+    }
 }

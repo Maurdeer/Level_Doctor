@@ -17,7 +17,7 @@ public class CameraControlScript : MonoBehaviour
     private bool IS_RESETTING_CAMERA = false;
     private bool HAS_PLAYED_BEFORE = false;
     private Vector3 Z_OFFSET = new Vector3(0, 0, -10);
-
+    private bool canMove = false;
     void Start()
     {
         levelCamera = GameManager.Instance.levelCameraObject;
@@ -59,6 +59,8 @@ public class CameraControlScript : MonoBehaviour
         IS_TRANSITION_PLAYING = true;
         levelCamera.transform.position = GameManager.Instance.goalObject.transform.position + Z_OFFSET;
         GameManager.Instance.SetIntroUIElementsActive(false);
+        GameManager.Instance.ObjectiveText.SetActive(true);
+        GameManager.Instance.SetButtonsActive(false);
     }
 
     private void CleanupAfterIntro()
@@ -66,6 +68,9 @@ public class CameraControlScript : MonoBehaviour
         IS_TRANSITION_PLAYING = false;
         GameManager.Instance.SetIntroUIElementsActive(true);
         HAS_PLAYED_BEFORE = true;
+        canMove = true;
+        GameManager.Instance.ObjectiveText.SetActive(false);
+        GameManager.Instance.GamePhaseChange();
     }
 
 
@@ -96,7 +101,7 @@ public class CameraControlScript : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance != null && !IS_TRANSITION_PLAYING && GameManager.Instance.gamePhase == 0)
+        if (GameManager.Instance != null && !IS_TRANSITION_PLAYING && canMove)
         {
             if (Input.GetKeyDown(KeyCode.R))
             {
@@ -104,9 +109,10 @@ public class CameraControlScript : MonoBehaviour
             }
         }
     }
+
     void FixedUpdate()
     {
-        if (GameManager.Instance != null && !IS_TRANSITION_PLAYING && !IS_RESETTING_CAMERA && GameManager.Instance.gamePhase == 0)
+        if (GameManager.Instance != null && !IS_TRANSITION_PLAYING && !IS_RESETTING_CAMERA && canMove)
         {
             
             Vector3 cameraOffset = new Vector3();
@@ -114,5 +120,10 @@ public class CameraControlScript : MonoBehaviour
             cameraOffset.y = Input.GetAxis("Vertical") * cameraSpeed;
             levelCamera.transform.position += new Vector3(cameraOffset.x, cameraOffset.y, 0);
         }        
+    }
+
+    public void ToggleCameraMove()
+    {
+        canMove = !canMove;
     }
 }

@@ -36,4 +36,9 @@ public class PlayerManager : MonoBehaviour
         playerCollider.enabled = value;
     }
 
+    public void ZeroXVelocity()
+    {
+        gameObject.GetComponent<Rigidbody2D>().linearVelocityX = 0;
+    }
+
 }

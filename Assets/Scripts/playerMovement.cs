@@ -45,7 +45,11 @@ public class playerMovement : MonoBehaviour
         {
             rb.linearVelocity = Vector2.up * Jump;
         }
- 
+        // If movement, essentially resets the player.
+        if (GameManager.Instance != null && GameManager.Instance.gamePhase == 1)
+        {
+            if (Input.GetKeyDown(KeyCode.R)) GameManager.Instance.ResetOnPlayerDeath();
+        }
     }
 
     

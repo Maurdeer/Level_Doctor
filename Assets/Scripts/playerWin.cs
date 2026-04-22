@@ -11,7 +11,8 @@ public class playerWin : MonoBehaviour
     {
         winScreen.SetActive(true);
         GameManager.Instance.PlayerManager.canMove = false;
-        GameManager.Instance.PlayerManager.SetPlayerColliderActive(false);
+        // GameManager.Instance.PlayerManager.SetPlayerColliderActive(false);
+        GameManager.Instance.PlayerManager.ZeroXVelocity();
         StartCoroutine(GoToNextScene());
     }
 

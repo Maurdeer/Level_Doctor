@@ -11,7 +11,7 @@ public class playerDeath : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Manager.PlayerTurnChange();
+        Manager.ResetOnPlayerDeath();
     }
    
 }
