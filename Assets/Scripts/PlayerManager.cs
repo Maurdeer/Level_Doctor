@@ -6,6 +6,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private BoxCollider2D playerCollider;
     Transform playerTransform;
     Vector3 defaultPosition;
+    Rigidbody2D playerRB;
 
 
     private void Start()
@@ -13,12 +14,13 @@ public class PlayerManager : MonoBehaviour
         canMove = false;
         playerTransform = transform;
         defaultPosition = transform.position;
+        playerRB = gameObject.GetComponent<Rigidbody2D>(); 
     }
 
     public void resetPosition()
     {
         playerTransform.position = defaultPosition;
-        ZeroXVelocity();
+        playerRB.linearVelocity = new Vector2(0, 0);
     }
 
     public void toggleMove()
@@ -29,7 +31,6 @@ public class PlayerManager : MonoBehaviour
 
     public void SetPlayerColliderActive(bool value)
     {
-        Rigidbody2D playerRB = gameObject.GetComponent<Rigidbody2D>(); 
         playerRB.linearVelocity = new Vector2(0, 0);
         if (value) playerRB.gravityScale = 1f;
         else playerRB.gravityScale = 0f;
@@ -38,7 +39,7 @@ public class PlayerManager : MonoBehaviour
 
     public void ZeroXVelocity()
     {
-        gameObject.GetComponent<Rigidbody2D>().linearVelocityX = 0;
+        playerRB.linearVelocityX = 0;
     }
 
 }
